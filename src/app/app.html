@@ -1,0 +1,183 @@
+<header class="glass">
+  <div class="container nav">
+    <div class="logo">MN.</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero Section -->
+  <section id="hero" class="hero animate-fade-in">
+    <div class="container">
+      <div class="profile-container">
+        <img src="profile.jpg" alt="Mohamed Nawasudeen" class="profile-img">
+      </div>
+      <h1>{{ profile().name }}</h1>
+      <h2>{{ profile().title }} | {{ profile().experience }} Experience</h2>
+      <div class="btn-group" style="justify-content: center;">
+        <a href="#experience" class="btn btn-primary">View My Work</a>
+        <a href="resume.pdf" download="Mohamed_Nawasudeen_Resume.pdf" class="btn btn-secondary">Download Resume</a>
+      </div>
+
+      <!-- Tech Stack Slider -->
+      <div class="tech-slider-container">
+        <div class="tech-slider">
+          @for (tech of techStacks().concat(techStacks()); track $index) {
+          <div class="tech-card glass">
+            <img [src]="tech.icon" [alt]="tech.name" class="tech-icon">
+            <span>{{ tech.name }}</span>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section - Redesigned Summary -->
+  <section id="about" class="reveal">
+    <div class="container">
+      <h2>Professional Profile</h2>
+      <div class="summary-spotlight glass">
+        <span class="summary-quote-icon">“</span>
+        <p class="summary-text">{{ profile().summary }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Domain Experience Section -->
+  <section id="domains" class="reveal-left">
+    <div class="container">
+      <h2>Domain Expertise</h2>
+      <div class="domain-grid">
+        @for (domain of profile().domains; track domain) {
+        <div class="domain-card glass">
+          <p style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">{{ domain }}</p>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="reveal-right">
+    <div class="container">
+      <h2>Technical Expertise</h2>
+      <div class="skills-grid">
+        <div class="skill-card glass" style="border-top: 4px solid var(--accent-primary);">
+          <h3>Frontend</h3>
+          <div class="skill-list">
+            @for (skill of profile().skills.frontend; track skill) {
+            <span class="skill-tag">{{ skill }}</span>
+            }
+          </div>
+        </div>
+        <div class="skill-card glass" style="border-top: 4px solid var(--accent-secondary);">
+          <h3>Backend</h3>
+          <div class="skill-list">
+            @for (skill of profile().skills.backend; track skill) {
+            <span class="skill-tag">{{ skill }}</span>
+            }
+          </div>
+        </div>
+        <div class="skill-card glass" style="border-top: 4px solid var(--text-secondary);">
+          <h3>Tools & AI</h3>
+          <div class="skill-list">
+            @for (skill of profile().skills.tools.concat(profile().skills.ai); track skill) {
+            <span class="skill-tag">{{ skill }}</span>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section - FIXED Professional Journey -->
+  <section id="experience">
+    <div class="container">
+      <h2 class="reveal">Professional Journey</h2>
+      <div class="timeline">
+        @for (exp of experiences(); track exp.company; let i = $index) {
+        <div class="timeline-item" [ngClass]="i % 2 === 0 ? 'reveal-left' : 'reveal-right'">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content glass" style="padding: 2.5rem; border-radius: 24px;">
+            <h3 style="color: var(--text-primary);">{{ exp.role }}</h3>
+            <div class="timeline-period">{{ exp.company }} | {{ exp.period }}</div>
+            <ul style="margin-left: 1.5rem; color: var(--text-secondary); margin-bottom: 2rem; font-size: 1rem;">
+              @for (item of exp.highlights; track item) {
+              <li style="margin-bottom: 0.5rem;">{{ item }}</li>
+              }
+            </ul>
+
+            <div class="project-list">
+              <strong
+                style="color: var(--accent-primary); margin-bottom: 0.75rem; display: block; font-size: 1.1rem;">Key
+                Projects:</strong>
+              @for (proj of exp.projects; track proj.name) {
+              <div class="project-item">
+                <h4>{{ proj.name }}</h4>
+                <p>{{ proj.description }}</p>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education" class="reveal-right">
+    <div class="container">
+      <h2>Education</h2>
+      <div class="education-card glass">
+        <h3>{{ profile().education.degree }}</h3>
+        <p class="college">{{ profile().education.college }}</p>
+        <p style="color: var(--text-secondary); font-weight: 500;">Batch: {{ profile().education.period }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section - Ecommerce Style Redesign -->
+  <section id="contact" class="contact-banner reveal">
+    <div class="container">
+      <div class="contact-content">
+        <span class="pre-title">Let's Work Together</span>
+        <h2>Ready to bring your ideas to life?</h2>
+        <p class="contact-description">I'm currently available for full-time roles and high-impact projects. Reach out
+          directly and let's build something exceptional.</p>
+
+        <div class="contact-grid">
+          <div class="contact-method">
+            <span class="method-label">Email Me</span>
+            <a [href]="'mailto:' + profile().email" class="method-value">{{ profile().email }}</a>
+          </div>
+          <div class="contact-method">
+            <span class="method-label">Call Me</span>
+            <span class="method-value">{{ profile().phone }}</span>
+          </div>
+          <div class="contact-method">
+            <span class="method-label">Network</span>
+            <a [href]="profile().linkedin" target="_blank" class="method-value">LinkedIn Profile</a>
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem;">
+          <a [href]="'mailto:' + profile().email" class="btn btn-primary btn-large">Start a Conversation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p style="font-weight: 600;">&copy; 2026 {{ profile().name }}. Built with Angular & High-End Design.</p>
+  </div>
+</footer>
