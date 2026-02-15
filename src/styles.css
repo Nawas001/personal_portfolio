@@ -1,25 +1,31 @@
 :root {
-    /* Color Palette - Elegant Light Theme (White & Pale Green) */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f0fdf4;
-    /* Pale Green Tint */
-    --accent-primary: #22c55e;
-    /* Primary Green */
-    --accent-secondary: #86efac;
-    /* Soft Pale Green */
-    --text-primary: #0f172a;
-    /* Dark Slate Header Text */
-    --text-secondary: #475569;
-    /* Slate Gray Body Text */
-    --glass-bg: rgba(255, 255, 255, 0.85);
-    --glass-border: rgba(34, 197, 94, 0.2);
-    --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
+    /* luxury "Champagne & Emerald" Palette */
+    --bg-primary: #fcfaf7;
+    /* Champagne White */
+    --bg-secondary: #f3f0e8;
+    /* Soft Parchment */
+
+    --accent-primary: #064e3b;
+    /* Deep Emerald */
+    --accent-secondary: #065f46;
+    /* Emerald Glow */
+    --accent-tertiary: #b45309;
+    /* Warm Amber */
+
+    --text-primary: #022c22;
+    /* Near Black Green */
+    --text-secondary: #334155;
+    /* Slate Gray */
+
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(6, 78, 59, 0.1);
+    --glass-shadow: 0 20px 50px rgba(6, 78, 59, 0.08);
 
     /* Typography */
     --font-family: 'Inter', system-ui, -apple-system, sans-serif;
 
-    /* Spacing */
-    --section-padding: 8rem 1rem;
+    /* Tighter Spacing for Elegance */
+    --section-padding: 4.5rem 1rem;
 }
 
 * {
@@ -38,68 +44,87 @@ body {
     font-family: var(--font-family);
     line-height: 1.7;
     overflow-x: hidden;
-    position: relative;
 }
 
-/* Premium Background Layers */
-body::before {
-    content: '';
+/* Luxury Textured Background */
+.bg-fixed-layer {
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background-color: var(--bg-primary);
+    background-image:
+        radial-gradient(at 0% 0%, rgba(6, 78, 59, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(180, 83, 9, 0.03) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(6, 78, 59, 0.05) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(180, 83, 9, 0.03) 0px, transparent 50%);
+}
+
+/* Noise/Grain Effect Layer */
+.bg-fixed-layer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.02;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.bg-grid {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-image:
-        radial-gradient(var(--glass-border) 1px, transparent 1px);
-    background-size: 40px 40px;
-    opacity: 0.3;
-    pointer-events: none;
-    z-index: -1;
+        linear-gradient(rgba(6, 78, 59, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6, 78, 59, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
 }
 
 .bg-blobs {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    z-index: -2;
-    pointer-events: none;
-    filter: blur(80px);
+    filter: blur(120px);
 }
 
 .blob {
     position: absolute;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%);
+    width: 1000px;
+    height: 1000px;
+    background: radial-gradient(circle, rgba(6, 78, 59, 0.08) 0%, transparent 70%);
     border-radius: 50%;
-    opacity: 0.2;
-    animation: move 20s infinite alternate;
+    animation: move 40s infinite alternate ease-in-out;
 }
 
 .blob-1 {
-    top: -10%;
+    top: -20%;
     left: -10%;
-    background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
-    animation-duration: 25s;
+    background: radial-gradient(circle, rgba(180, 83, 9, 0.05) 0%, transparent 70%);
 }
 
 .blob-2 {
-    bottom: -10%;
+    bottom: -20%;
     right: -10%;
-    animation-duration: 30s;
-    animation-delay: -5s;
+    animation-delay: -15s;
 }
 
 @keyframes move {
-    from {
-        transform: translate(0, 0) scale(1);
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
     }
 
-    to {
-        transform: translate(100px, 100px) scale(1.2);
+    100% {
+        transform: translate(200px, 100px) scale(1.2) rotate(30deg);
     }
 }
 
