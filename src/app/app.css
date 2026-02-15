@@ -107,12 +107,12 @@ nav {
 .btn-primary {
     background: var(--accent-primary);
     color: white;
-    box-shadow: 0 10px 30px rgba(6, 78, 59, 0.2);
+    box-shadow: 0 10px 30px rgba(10, 25, 47, 0.2);
 }
 
 .btn-primary:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(6, 78, 59, 0.3);
+    box-shadow: 0 15px 40px rgba(10, 25, 47, 0.3);
     background: var(--accent-secondary);
 }
 
